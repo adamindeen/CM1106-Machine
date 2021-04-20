@@ -1,0 +1,97 @@
+<html>
+<head>
+	<!--Style-->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!--Scripts-->
+	<script src="scripts/matter.min.js"></script>
+	<script src="scripts/logic.js"></script>
+	<script src="scripts/level.js"></script>
+	<script src="scripts/guy.js"></script>
+	<script src="scripts/warningGuy.js"></script>
+	<script src="scripts/errorGuy.js"></script>
+</head>
+<body>
+<script>
+//SETUP
+
+	var height = 600,
+		width = 1066;
+
+	//Matter
+
+	var Engine = Matter.Engine,
+		Events = Matter.Events,
+		Render = Matter.Render,
+		World = Matter.World,
+		Body = Matter.Body,
+		Bodies = Matter.Bodies,
+		Bounds = Matter.Bounds
+		Mouse = Matter.Mouse,
+		Constraint = Matter.Constraint,
+		MouseConstraint = Matter.MouseConstraint,
+		Composite = Matter.Composite,
+		Vertices = Matter.Vertices;
+
+	var engine = Engine.create();
+
+	var render = Render.create({
+		element: document.body,
+		engine: engine,
+		options: {
+			width: width,
+			height: height,
+			background: '#000000',
+			wireframes : false,
+		}
+	});
+
+	//Collision filter categories
+
+	var interactive = 0x0001,
+		wall = 0x0002,
+		good = 0x0004,
+		bad = 0x0008,
+		sensor = 0x0016,
+		background = 0x0032;
+
+	//Running engine
+
+	Engine.run(engine);
+
+	Render.run(render);
+	
+//MUSIC
+
+	var title = new Audio('sound/music/title.wav'),
+		tutorialLoop = new Audio('sound/music/tutorialLoop.wav'),
+		ready = new Audio('sound/music/ready.wav'),
+		loop = new Audio('sound/music/loop.wav');
+
+//LEVEL
+
+	level = new Level();
+
+//GUY
+
+	guy = new Guy();
+
+//WARNINGGUY
+
+	warningguy1 = new warningGuy(100, 10000);
+	warningguy2 = new warningGuy(800, 20000);
+	warningguy3 = new warningGuy(400, 30000);
+	warningguy4 = new warningGuy(900, 45000);
+	warningguy5 = new warningGuy(50, 60000);
+
+//ERRORGUY
+
+	errorguy = new errorGuy();
+	
+//LOGIC
+
+	logic = new Logic();
+
+</script>
+</body>
+</html>
